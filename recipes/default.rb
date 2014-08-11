@@ -33,6 +33,7 @@ service 'ssh' do
   provider service_provider
   service_name node['openssh']['service_name']
   supports value_for_platform(
+    'freebsd' => { 'default' => [:restart, :reload, :status] },
     'debian' => { 'default' => [:restart, :reload, :status] },
     'ubuntu' => {
       '8.04' => [:restart, :reload],
@@ -73,5 +74,5 @@ template '/etc/ssh/sshd_config' do
   variables(
     :options => openssh_server_options
   )
-  notifies :restart, 'service[ssh]'
+#  notifies :restart, 'service[ssh]'
 end
