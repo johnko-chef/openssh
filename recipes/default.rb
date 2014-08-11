@@ -74,5 +74,6 @@ template '/etc/ssh/sshd_config' do
   variables(
     :options => openssh_server_options
   )
+### no notify for restart (we do so after config-test via sshd-config recipe)!
 #  notifies :restart, 'service[ssh]'
 end
